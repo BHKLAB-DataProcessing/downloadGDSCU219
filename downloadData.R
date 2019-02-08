@@ -1,3 +1,5 @@
+library("downloader")
+
 getGDSCU129 <- function(tmpdir = tempdir()) {
   dir.create(tmpdir, showWarnings=FALSE, recursive=TRUE)
 
