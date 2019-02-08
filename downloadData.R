@@ -35,9 +35,9 @@ getGDSCU129 <- function(tmpdir = tempdir()) {
          res <- unzip(zipfile=file.path(tmpdir, basename(uarchive)[i]), exdir=tmpdir)
          message(res)
          ## rename CEL files 
-         sapply(as.character(fff[ ,"Name"]), function (x) {
-           system(sprintf("mv %s %s", x, gsub("[.]cel$", ".CEL", x)))
-           })
+         # sapply(as.character(fff[ ,"Name"]), function (x) {
+         #   system(sprintf("mv %s %s", x, gsub("[.]cel$", ".CEL", x)))
+         #   })
          ## compress each CEL file individually using gzip
          sapply(fff[ ,"Name"], R.utils::gzip, overwrite=TRUE)
          fff[ ,"Name"] <- gsub("[.]cel$", ".CEL.gz", as.character(fff[ ,"Name"]))
