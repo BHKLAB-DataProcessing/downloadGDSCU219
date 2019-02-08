@@ -29,7 +29,8 @@ getGDSCU129 <- function(tmpdir = tempdir()) {
        i <- i - 1
        } else {
          ## unzip archive
-         fff <- unzip(zipfile=file.path(tmpdir, basename(uarchive)[i]), list=TRUE, exdir = "/pfs/out/")
+         fff <- unzip(zipfile=file.path(tmpdir, basename(uarchive)[i]), list=TRUE)
+         fff[,"Name"] <- file.path("/pfs/out", as.character(fff[,"Name"]))
          celfile.timestamp <- c(celfile.timestamp, as.character(fff[ ,"Date"]))
          res <- unzip(zipfile=file.path(tmpdir, basename(uarchive)[i]), exdir="/pfs/out/")
          ## rename CEL files 
