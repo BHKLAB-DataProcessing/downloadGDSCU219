@@ -1,4 +1,3 @@
-
 getGDSCU129 <- function(tmpdir = "tmp/download") {
   dir.create(tmpdir, showWarnings=FALSE, recursive=TRUE)
 
@@ -48,3 +47,4 @@ getGDSCU129 <- function(tmpdir = "tmp/download") {
      save(list=c("celfile.timestamp"), compress=TRUE, file="/pfs/out/celfile_timestamp.RData")
 
    }
+getGDSCU129()
