@@ -32,7 +32,7 @@ getGDSCU129 <- function(tmpdir = tempdir()) {
          fff <- unzip(zipfile=file.path(tmpdir, basename(uarchive)[i]), list=TRUE)
          fff[,"Name"] <- file.path("/pfs/out", as.character(fff[,"Name"]))
          celfile.timestamp <- c(celfile.timestamp, as.character(fff[ ,"Date"]))
-         res <- unzip(zipfile=file.path(tmpdir, basename(uarchive)[i]), exdir="/pfs/out")
+         res <- unzip(zipfile=file.path(tmpdir, basename(uarchive)[i]), exdir=tmpdir)
          message(res)
          ## rename CEL files 
          sapply(as.character(fff[ ,"Name"]), function (x) {
@@ -42,6 +42,9 @@ getGDSCU129 <- function(tmpdir = tempdir()) {
          sapply(fff[ ,"Name"], R.utils::gzip, overwrite=TRUE)
          fff[ ,"Name"] <- gsub("[.]cel$", ".CEL.gz", as.character(fff[ ,"Name"]))
          celfn <- c(celfn, fff[ ,"Name"])
+         sapply(as.character(fff[ ,"Name"]), function (x) {
+           system(sprintf("mv %s %s", x, gsub(tmpdir, "/pfs/out", x, fixed=TRUE)))
+           })
          i <- i + 1
        }
      }
