@@ -1,4 +1,4 @@
-getGDSCU129 <- function(tmpdir = "tmp/download") {
+getGDSCU129 <- function(tmpdir = tempdir()) {
   dir.create(tmpdir, showWarnings=FALSE, recursive=TRUE)
 
   ftpdir <- "ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-3610/"
