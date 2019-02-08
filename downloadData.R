@@ -26,13 +26,13 @@ getGDSCU129 <- function(tmpdir = tempdir()) {
       if(dwl.status != 0) {
        message("\t-> download failed, let's try again ...")
        file.remove(file.path(tmpdir, basename(uarchive)[i]))
-       i <- i - 1
+       # i <- i - 1
        } else {
          ## unzip archive
          fff <- unzip(zipfile=file.path(tmpdir, basename(uarchive)[i]), list=TRUE)
          fff[,"Name"] <- file.path("/pfs/out", as.character(fff[,"Name"]))
          celfile.timestamp <- c(celfile.timestamp, as.character(fff[ ,"Date"]))
-         res <- unzip(zipfile=file.path(tmpdir, basename(uarchive)[i]), exdir="/pfs/out/")
+         res <- unzip(zipfile=file.path(tmpdir, basename(uarchive)[i]), exdir="/pfs/out")
          message(res)
          ## rename CEL files 
          sapply(as.character(fff[ ,"Name"]), function (x) {
