@@ -40,7 +40,7 @@ getGDSCU129 <- function(tmpdir = tempdir()) {
          #   })
          ## compress each CEL file individually using gzip
          sapply(fff[ ,"Name"], R.utils::gzip, overwrite=TRUE)
-         fff[ ,"Name"] <- gsub("[.]cel$", ".CEL.gz", as.character(fff[ ,"Name"]))
+         fff[ ,"Name"] <- gsub("[.]cel$", ".cel.gz", as.character(fff[ ,"Name"]))
          celfn <- c(celfn, fff[ ,"Name"])
          sapply(as.character(fff[ ,"Name"]), function (x) {
            system(sprintf("mv %s %s", x, gsub(tmpdir, "/pfs/out", x, fixed=TRUE)))
