@@ -1,13 +1,13 @@
 library("downloader")
 
-getGDSCU129 <- function(tmpdir = tempdir()) {
+getGDSCU219 <- function(tmpdir = tempdir()) {
   dir.create(tmpdir, showWarnings=FALSE, recursive=TRUE)
 
   ftpdir <- "ftp://ftp.ebi.ac.uk/pub/databases/microarray/data/experiment/MTAB/E-MTAB-3610/"
   
   ## phenodata
-  dwl.status <- download(url=sprintf("%s/E-MTAB-3610.sdrf.txt", ftpdir), destfile=file.path(tmpdir, "E-MTAB-3610.sdrf.txt"), quiet=TRUE)
-  sampleinfo <- read.csv(file.path(tmpdir, "E-MTAB-3610.sdrf.txt"), sep="\t", stringsAsFactors=FALSE)
+  dwl.status <- download(url=sprintf("%s/E-MTAB-3610.sdrf.txt", ftpdir), destfile=file.path("/pfs/out", "E-MTAB-3610.sdrf.txt"), quiet=TRUE)
+  sampleinfo <- read.csv(file.path("/pfs/out", "E-MTAB-3610.sdrf.txt"), sep="\t", stringsAsFactors=FALSE)
   rownames(sampleinfo) <- sampleinfo[ , "Assay.Name"]
   sampleinfo[ , "Array.Data.File"] <- gsub("[.]cel$", ".CEL.gz", sampleinfo[ , "Array.Data.File"])
   uarchive <- sort(unique(sampleinfo[ , "Comment..ArrayExpress.FTP.file."]))
@@ -54,4 +54,4 @@ getGDSCU129 <- function(tmpdir = tempdir()) {
      save(list=c("celfile.timestamp"), compress=TRUE, file="/pfs/out/celfile_timestamp.RData")
 
    }
-getGDSCU129()
+getGDSCU219()
